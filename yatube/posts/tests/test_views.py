@@ -60,7 +60,6 @@ class PostPagesTests(TestCase):
         # Логиним юзера - тестового автора
         self.authorized_client.force_login(self.post_test.author)
 
-
     @classmethod
     def tearDownClass(cls):
         # Рекурсивно удаляем временную после завершения тестов
@@ -298,10 +297,9 @@ class FollowTests(TestCase):
         self.assertEqual(Follow.objects.count(), follows_count + 1)
         # Отпишем
         self.authorized_client1.get(
-            reverse(
-                'posts:profile_unfollow',
-                args=[self.test_author2])
-            )
+            reverse('posts:profile_unfollow',
+                    args=[self.test_author2])
+        )
         self.assertNotEqual(Follow.objects.count(), follows_count + 1)
 
     def test_unfollow_view(self):
