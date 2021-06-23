@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/"><span style="color:red">Ya</span>tube</a>
+    <nav class="my-2 my-md-0 mr-md-3">
+        {% if next %}
+            <div class="alert alert-info" role="alert">
+              Вы обратились к странице, доступ к которой возможен только для залогиненных пользователей.<br>
+              Пожалуйста, авторизуйтесь.
+            </div>
+        {% else %}
+        {% endif %}
+        {% if user.is_authenticated %}
+        <div class="alert alert-info" role="alert">
+                <a href="{% url 'posts:new_post' %}">Новая запись</a>
+        </div>
+        Пользователь: {{ user.username }}.
+        <a class="p-2 text-dark" href="{% url 'password_change' %}">Изменить пароль</a>
+        <a class="p-2 text-dark" href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+        <a class="p-2 text-dark" href="{% url 'login' %}">Войти</a> |
+        <a class="p-2 text-dark" href="{% url 'signup' %}">Регистрация</a>
+        {% endif %}
+    </nav>
+</nav>
