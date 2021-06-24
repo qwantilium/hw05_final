@@ -87,12 +87,17 @@ def post_view(request, username, post_id):
     comments = post.comments.all()
     posts_count = Post.objects.filter(author=author).count()
     form = CommentForm(request.POST or None)
+    follower_count = Follow.objects.filter(author=author).count()
+    # запутался в lookup, как достать список авторов на которых подписан?
+    following = Follow.objects.filter(author=request.user)
     context = {
-        "post": post,
-        "comments": comments,
-        "author": author,
-        "posts_count": posts_count,
-        "form": form
+        'post': post,
+        'comments': comments,
+        'author': author,
+        'posts_count': posts_count,
+        'form': form,
+        'follower_count': follower_count,
+        'following': following
     }
     return render(request, 'posts/post.html', context=context)
 
@@ -102,14 +107,14 @@ def page_not_found(request, exception):
     # выводить её в шаблон пользователской страницы 404 мы не станем
     return render(
         request,
-        "misc/404.html",
-        {"path": request.path},
+        'misc/404.html',
+        {'path': request.path},
         status=404
     )
 
 
 def server_error(request):
-    return render(request, "misc/500.html", status=500)
+    return render(request, 'misc/500.html', status=500)
 
 
 @login_required
@@ -138,9 +143,8 @@ def follow_index(request):
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     user = request.user
-    if user != author and \
-            not Follow.objects.filter(user=user, author=author).exists():
-        Follow.objects.create(user=request.user, author=author)
+    if user != author:
+        Follow.objects.get_or_create(user=user, author=author)
     return redirect('posts:profile', username)
 
 

@@ -2,15 +2,15 @@
 {% block title %}Записи сообщества {{ group.title }}{% endblock %}
 {% block header %}{{ group }}{% endblock %}
 {% block content %}
-<h1>{{ group }}</h1>
-        <p>
-                {{ group.description }}
-        </p>
-<div class="container">
-        {% include "menu.html" with index=True %}
-        {% for post in page %}
-                {% include "post_item.html" with post=post %}
-        {% endfor %}
-</div>
-{% include "paginator.html" with items=page paginator=paginator%}
+  <h1>{{ group }}</h1>
+    <p>
+      {{ group.description }}
+    </p>
+  <div class="container">
+    {% include "menu.html" with index=True %}
+      {% for post in page %}
+        {% include "post_item.html" with post=post %}
+      {% endfor %}
+  </div>
+  {% include "paginator.html" with items=page paginator=paginator%}
 {% endblock %}

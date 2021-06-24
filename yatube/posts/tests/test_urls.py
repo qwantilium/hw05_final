@@ -98,6 +98,7 @@ class StaticURLTests(TestCase):
                                        kwargs=self.post_kwargs),
             'posts/profile.html': reverse('posts:profile',
                                           args=[self.post.author]),
+            'misc/404.html': '/blablablablablablablrfgfdg/',
         }
         for template, url in templates_url_names.items():
             with self.subTest(template=template):

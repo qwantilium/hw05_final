@@ -108,10 +108,9 @@ class Follow (models.Model):
         verbose_name_plural = 'Подписки'
         ordering = ['-author'][:10]
         constraints = [
-            models.CheckConstraint(
-                name="prevent_self_follow",
-                check=~models.Q(user=models.F("author")),
-            ),
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name="unique_followers")
         ]
 
     def __str__(self):
