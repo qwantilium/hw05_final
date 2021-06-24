@@ -98,8 +98,9 @@ def post_view(request, username, post_id):
         'posts_count': posts_count,
         'form': form,
         'follower_count': follower_count,
-         # 'following': following
     }
+    # 'following': following
+    # }
     return render(request, 'posts/post.html', context=context)
 
 
