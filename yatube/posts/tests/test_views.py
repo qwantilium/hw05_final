@@ -200,9 +200,6 @@ class PostPagesTests(TestCase):
         self.assertEqual(
             response.context['post'],
             post)
-        # self.assertEqual(
-        #    response.context['post.image'], self.post_test.image
-        # )
         self.assertEqual(
             response.context['posts_count'],
             self.posts_count)

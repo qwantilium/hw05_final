@@ -87,10 +87,8 @@ def post_view(request, username, post_id):
     comments = post.comments.all()
     posts_count = Post.objects.filter(author=author).count()
     form = CommentForm(request.POST or None)
-    follower_count = Follow.objects.filter(author=author).count()
-    # запутался в lookup, как достать список авторов на которых подписан?
-    # following = Follow.objects.filter(author=request.user)
-    # ерез модель юзер?
+    follower_count = author.follower.count()
+    following_count = author.following.count()
     context = {
         'post': post,
         'comments': comments,
@@ -98,9 +96,8 @@ def post_view(request, username, post_id):
         'posts_count': posts_count,
         'form': form,
         'follower_count': follower_count,
+        'following_count': following_count,
     }
-    # 'following': following
-    # }
     return render(request, 'posts/post.html', context=context)
 
 
