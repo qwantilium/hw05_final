@@ -140,7 +140,9 @@ STATIC_ROOT = os.path.join(BASE_DIR,
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = "/auth/login/"
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'posts:index'
+
 
 #  подключаем движок filebased.EmailBackend
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"

@@ -12,4 +12,4 @@ class SignUp(CreateView):
 
 def only_user_view(request):
     if not request.user.is_authenticated:
-        return redirect('/auth/login/')
+        return redirect('login')
